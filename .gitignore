@@ -1,0 +1,7 @@
+# Keep real agreement data out of this repo
+*.pdf
+*.docx
+data/
+real-data/
+*.json
+.DS_Store
