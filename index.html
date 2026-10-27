@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Adovate Agreement Hub</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: fixed left rail of sections + a working pane; rail becomes a top strip on phones */
+:root{
+  --bg:#F3F6F6; --surface:#FFFFFF; --ink:#15222A; --muted:#58686F; --line:#D9E1E3; --accent:#1D5C6B; --accent-soft:#E2EEF1;
+  --bad:#A8261B; --bad-bg:#FCEBE9; --warn:#8A5300; --warn-bg:#FFF2D6; --good:#1D6A3A; --good-bg:#E4F3E8; --idle:#5B6770; --idle-bg:#ECEFF1;
+  --sans:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif; --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0E1519; --surface:#152027; --ink:#E3EBEE; --muted:#93A3AA; --line:#25343B; --accent:#74B6C6; --accent-soft:#16313A;
+  --bad:#F1968E; --bad-bg:#3A1B19; --warn:#E6B865; --warn-bg:#382A12; --good:#83CB9F; --good-bg:#15301F; --idle:#A3B0B6; --idle-bg:#1E2A30; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E1519; --surface:#152027; --ink:#E3EBEE; --muted:#93A3AA; --line:#25343B; --accent:#74B6C6; --accent-soft:#16313A;
+  --bad:#F1968E; --bad-bg:#3A1B19; --warn:#E6B865; --warn-bg:#382A12; --good:#83CB9F; --good-bg:#15301F; --idle:#A3B0B6; --idle-bg:#1E2A30; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14.5px;line-height:1.5}
+.app{display:grid;grid-template-columns:220px minmax(0,1fr);min-height:100vh}
+.rail{background:var(--surface);border-right:1px solid var(--line);padding-block:20px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:16px;display:flex;flex-direction:column;gap:24px}
+.brand{font-weight:700;font-size:16px;letter-spacing:-.01em;display:flex;flex-direction:column;gap:2px}
+.brand small{font-weight:500;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.nav{display:flex;flex-direction:column;gap:2px}
+.nav a{display:flex;justify-content:space-between;align-items:center;padding:8px 10px;border-radius:6px;color:var(--ink);text-decoration:none;font-weight:500}
+.nav a:hover{background:var(--idle-bg)}
+.nav a.on{background:var(--accent-soft);color:var(--accent);font-weight:600}
+.nav .count{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.rail .note{margin-top:auto;font-size:12px;color:var(--muted);border-top:1px solid var(--line);padding-top:12px}
+main{padding-block:20px 48px;padding-left:24px;padding-right:max(16px,env(safe-area-inset-right,0px));min-width:0;display:flex;flex-direction:column;gap:20px;max-width:1180px}
+.proto{font-size:12.5px;color:var(--warn);background:var(--warn-bg);border-radius:6px;padding:8px 12px}
+h1{font-size:24px;line-height:1.2;margin:0;letter-spacing:-.015em;text-wrap:balance}
+h2{font-size:13px;margin:0;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:600}
+.head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:12px}
+.sub{color:var(--muted);margin:4px 0 0}
+.mono{font-family:var(--mono);font-size:12.5px;font-variant-numeric:tabular-nums}
+.btn{font:inherit;font-weight:600;border-radius:6px;padding:8px 14px;border:1px solid var(--accent);background:var(--accent);color:var(--surface);cursor:pointer}
+.btn.ghost{background:transparent;color:var(--accent)}
+.btn:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,tr:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:14px 16px;display:flex;flex-direction:column;gap:2px;text-decoration:none;color:var(--ink)}
+.stat:hover{border-color:var(--accent)}
+.stat b{font-size:28px;font-weight:700;font-variant-numeric:tabular-nums;line-height:1.1}
+.stat span{color:var(--muted);font-size:13px}
+.stat.alert b{color:var(--bad)} .stat.warnc b{color:var(--warn)}
+.cols{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,2fr);gap:16px;align-items:start}
+.list{display:flex;flex-direction:column}
+.item{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;padding:10px 0;border-top:1px solid var(--line);cursor:pointer}
+.item:first-child{border-top:0}
+.item:hover .t{color:var(--accent)}
+.item .t{font-weight:600}
+.item .m{color:var(--muted);font-size:13px;grid-column:1}
+.item .r{grid-row:1 / span 2;grid-column:2;align-self:center;text-align:right}
+.pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 8px;border-radius:999px;white-space:nowrap}
+.p-bad{background:var(--bad-bg);color:var(--bad)} .p-warn{background:var(--warn-bg);color:var(--warn)} .p-good{background:var(--good-bg);color:var(--good)} .p-idle{background:var(--idle-bg);color:var(--idle)} .p-info{background:var(--accent-soft);color:var(--accent)}
+.pipe{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.step{border:1px solid var(--line);border-radius:6px;padding:10px;display:flex;flex-direction:column;gap:2px}
+.step b{font-size:20px;font-variant-numeric:tabular-nums}
+.step span{font-size:12px;color:var(--muted)}
+.filters{display:flex;flex-wrap:wrap;gap:8px}
+input,select,textarea{font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:7px 10px}
+.filters input{flex:1 1 220px;min-width:0}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:760px}
+th{text-align:left;font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:600;padding:10px 12px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+tbody tr{cursor:pointer} tbody tr:hover{background:var(--accent-soft)}
+tbody tr:last-child td{border-bottom:0}
+.empty{color:var(--muted);padding:16px}
+.days{font-family:var(--mono);font-size:12.5px;font-variant-numeric:tabular-nums}
+.d-bad{color:var(--bad);font-weight:500} .d-warn{color:var(--warn);font-weight:500}
+dl{display:grid;grid-template-columns:minmax(120px,170px) minmax(0,1fr);gap:8px 16px;margin:0}
+dt{color:var(--muted);font-size:13px} dd{margin:0}
+.ob{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:start;padding:8px 0;border-top:1px solid var(--line)}
+.ob:first-child{border-top:0}
+.ob.done .txt{text-decoration:line-through;color:var(--muted)}
+.ob input{margin-top:3px;padding:0}
+.hist{display:flex;flex-direction:column;gap:8px;font-size:13px}
+.hist div{display:grid;grid-template-columns:96px minmax(0,1fr);gap:8px}
+.hist .mono{color:var(--muted)}
+.pdf{border:1px dashed var(--line);border-radius:8px;padding:16px;display:flex;flex-direction:column;gap:6px;color:var(--muted);font-size:13px}
+.pdf b{color:var(--ink)}
+.back{background:none;border:0;color:var(--accent);font:inherit;font-weight:600;padding:0;cursor:pointer;align-self:flex-start}
+form.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 16px}
+form.grid label{display:flex;flex-direction:column;gap:4px;font-size:13px;font-weight:600}
+form.grid label span{font-weight:400;color:var(--muted)}
+form.grid .wide{grid-column:1 / -1}
+.drop{border:1px dashed var(--accent);border-radius:8px;padding:16px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;background:var(--accent-soft)}
+.drop p{margin:0;max-width:60ch}
+.toast{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--bg);padding:10px 14px;border-radius:6px;font-weight:500}
+.alerttext{font-size:12.5px}
+.ms{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center}
+.chk{display:flex;gap:6px;align-items:center;font-weight:500}
+.chk input{padding:0;margin:0}
+.addr{display:flex;gap:8px}
+.addr input{flex:1 1 auto;min-width:0}
+.x{border:0;background:none;color:inherit;font:inherit;cursor:pointer;padding:0 0 0 4px}
+.mail{border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.mh{background:var(--bg);padding:12px 14px;display:flex;flex-direction:column;gap:4px;font-size:13px;border-bottom:1px solid var(--line)}
+.mh span{display:inline-block;width:60px;color:var(--muted)}
+.mb{padding:4px 14px 10px;font-size:13.5px}
+.mb ul{padding-left:18px;margin:8px 0}
+.mb a{color:var(--accent);font-weight:600}
+.item.sel{box-shadow:inset 3px 0 0 var(--accent);padding-left:10px}
+.item.sel .t{color:var(--accent)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+@media (max-width:860px){
+  .app{grid-template-columns:minmax(0,1fr)}
+  .rail{border-right:0;border-bottom:1px solid var(--line);padding-right:max(16px,env(safe-area-inset-right,0px));gap:12px}
+  .nav{flex-direction:row;flex-wrap:wrap}
+  .rail .note{display:none}
+  main{padding-left:max(16px,env(safe-area-inset-left,0px))}
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cols{grid-template-columns:minmax(0,1fr)}
+  form.grid{grid-template-columns:minmax(0,1fr)}
+  .pipe{grid-template-columns:repeat(2,minmax(0,1fr))}
+  dl{grid-template-columns:minmax(0,1fr)} dt{margin-top:6px}
+}
+@media (prefers-reduced-motion:no-preference){.stat,.nav a{transition:border-color .15s,background .15s}}
+</style>
+</head>
+<body>
+
+<div class="app">
+  <aside class="rail">
+    <div class="brand">Agreement Hub<small>Adovate · Prototype</small></div>
+    <nav class="nav" id="nav">
+      <a href="#home" data-v="home">Home</a>
+      <a href="#agreements" data-v="agreements">Agreements <span class="count" id="c-ag"></span></a>
+      <a href="#obligations" data-v="obligations">Obligations <span class="count" id="c-ob"></span></a>
+      <a href="#alerts" data-v="alerts">Expiration alerts <span class="count" id="c-al"></span></a>
+      <a href="#new" data-v="new">Add agreement</a>
+    </nav>
+    <p class="note">Every name, date and agreement here is made up to show how the platform could work.</p>
+  </aside>
+  <main id="main"></main>
+</div>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+const DAY=864e5, T0=(()=>{const d=new Date();d.setHours(0,0,0,0);return d.getTime()})();
+const STEPS=["Requested","Drafting","In review","Out for signature"];
+const DONE_STATES=["Expired","Terminated"];
+const WINDOW=90;
+let A=[
+ {id:"ADO-MTA-2025-008",type:"MTA",dir:"Inbound",party:"Northfield University",contact:"Dana Whitlock, tech transfer office",owner:"M. Okafor",program:"Airway biology program",subject:"Primary airway epithelial cells",status:"Executed",eff:-400,exp:45,auto:"No",notice:60,survive:5,obs:[{t:"Submit annual material use report",due:20,done:false},{t:"Return or destroy remaining material",due:45,done:false}],hist:[[-410,"Request logged by M. Okafor"],[-402,"Signed by both parties"],[-401,"Signed copy filed; Claude extracted dates and obligations"]]},
+ {id:"ADO-CDA-2026-014",type:"CDA / NDA",dir:"Mutual",party:"Halbrook Biologics",contact:"Business development team",owner:"J. Rivera",program:"Formulation partnering",subject:"Discussion of inhaled formulation platform",status:"Executed",eff:-120,exp:245,auto:"No",notice:30,survive:5,obs:[],hist:[[-130,"Request logged by J. Rivera"],[-120,"Signed by both parties"]]},
+ {id:"ADO-MTA-2026-003",type:"MTA",dir:"Outbound",party:"Carver Institute",contact:"Lab of Dr. P. Hale",owner:"S. Lindqvist",program:"Compound screening",subject:"Reference compound samples (ADO-17)",status:"Executed",eff:-200,exp:530,auto:"No",notice:60,survive:3,obs:[{t:"Review recipient's publication draft (30-day window)",due:12,done:false}],hist:[[-215,"Request logged by S. Lindqvist"],[-200,"Signed by both parties"]]},
+ {id:"ADO-DUA-2026-002",type:"DUA",dir:"Inbound",party:"Meridian Health System",contact:"Research data office",owner:"A. Chen",program:"Registry analysis",subject:"De-identified patient registry extract",status:"In review",waiting:"Adovate legal",eff:null,exp:null,auto:"No",notice:null,survive:null,obs:[],hist:[[-21,"Request logged by A. Chen"],[-9,"Draft sent to legal for review"]]},
+ {id:"ADO-CDA-2026-019",type:"CDA / NDA",dir:"Inbound",party:"Tessaro Labs",contact:"Legal department",owner:"J. Rivera",program:"Device evaluation",subject:"Tessaro inhaler sensor specifications",status:"Out for signature",waiting:"Counterparty signer",eff:null,exp:null,auto:"No",notice:null,survive:null,obs:[],hist:[[-14,"Request logged by J. Rivera"],[-4,"Sent for signature"]]},
+ {id:"ADO-COL-2025-004",type:"Collaboration",dir:"Mutual",party:"Lakeside Research Foundation",contact:"Grants office",owner:"R. Patel",program:"Community asthma study",subject:"Joint study design and data sharing",status:"Executed",eff:-500,exp:80,auto:"Yes",notice:90,survive:3,obs:[{t:"Send quarterly progress report",due:5,done:false},{t:"Decide on renewal terms",due:-10,done:false}],hist:[[-520,"Request logged by R. Patel"],[-500,"Signed by both parties"]]},
+ {id:"ADO-SVC-2026-006",type:"Services",dir:"Inbound",party:"Quill Data Partners",contact:"Account manager",owner:"A. Chen",program:"Registry analysis",subject:"Biostatistics consulting",status:"Executed",eff:-60,exp:305,auto:"No",notice:30,survive:2,obs:[],hist:[[-70,"Request logged by A. Chen"],[-60,"Signed by both parties"]]},
+ {id:"ADO-CDA-2024-031",type:"CDA / NDA",dir:"Mutual",party:"Orlen Diagnostics",contact:"Partnerships team",owner:"M. Okafor",program:"Diagnostics partnering",subject:"Biomarker assay discussions",status:"Executed",eff:-760,exp:-12,auto:"No",notice:30,survive:3,obs:[],hist:[[-770,"Request logged by M. Okafor"],[-760,"Signed by both parties"]]},
+ {id:"ADO-MTA-2026-011",type:"MTA",dir:"Inbound",party:"Pinecrest College",contact:"Office of research",owner:"S. Lindqvist",program:"Airway biology program",subject:"Murine lung tissue samples",status:"Drafting",waiting:"Agreement owner",eff:null,exp:null,auto:"No",notice:null,survive:null,obs:[],hist:[[-6,"Request logged by S. Lindqvist"]]},
+ {id:"ADO-CDA-2026-021",type:"CDA / NDA",dir:"Mutual",party:"Bayview Medical Center",contact:"Clinical research office",owner:"R. Patel",program:"Community asthma study",subject:"Site feasibility discussions",status:"Requested",waiting:"Agreement owner",eff:null,exp:null,auto:"No",notice:null,survive:null,obs:[],hist:[[-2,"Request logged by R. Patel"]]},
+ {id:"ADO-MTA-2024-017",type:"MTA",dir:"Outbound",party:"Northfield University",contact:"Lab of Dr. K. Moss",owner:"M. Okafor",program:"Compound screening",subject:"ADO-09 compound samples",status:"Expired",eff:-900,exp:-170,auto:"No",notice:60,survive:3,obs:[{t:"Confirm material destroyed",due:-140,done:true}],hist:[[-900,"Signed by both parties"],[-170,"Agreement expired"],[-150,"Destruction certificate received"]]},
+ {id:"ADO-DUA-2025-005",type:"DUA",dir:"Outbound",party:"Carver Institute",contact:"Data governance team",owner:"A. Chen",program:"Registry analysis",subject:"Adovate study dataset (de-identified)",status:"Executed",eff:-300,exp:430,auto:"No",notice:60,survive:5,obs:[{t:"Collect annual data security attestation",due:65,done:false}],hist:[[-310,"Request logged by A. Chen"],[-300,"Signed by both parties"]]},
+ {id:"ADO-CDA-2026-009",type:"CDA / NDA",dir:"Inbound",party:"Westgate Pharma",contact:"Alliance management",owner:"J. Rivera",program:"Formulation partnering",subject:"Westgate excipient data",status:"Executed",eff:-150,exp:215,auto:"No",notice:30,survive:5,obs:[],hist:[[-160,"Request logged by J. Rivera"],[-150,"Signed by both parties"]]},
+ {id:"ADO-COL-2026-001",type:"Collaboration",dir:"Mutual",party:"Tessaro Labs",contact:"Legal department",owner:"R. Patel",program:"Device evaluation",subject:"Sensor pilot in study participants",status:"In review",waiting:"Counterparty",eff:null,exp:null,auto:"No",notice:null,survive:null,obs:[],hist:[[-30,"Request logged by R. Patel"],[-11,"Redlines sent to Tessaro"]]}
+];
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const dt=off=>off==null?"—":new Date(T0+off*DAY+432e5).toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"});
+function alertOf(a){
+  if(a.exp==null||DONE_STATES.includes(a.status)||a.status!=="Executed")return null;
+  if(a.exp<0)return{k:"bad",t:"Past expiration — update status"};
+  if(a.auto!=="Yes"&&a.notice!=null&&a.exp-a.notice<0)return{k:"bad",t:"Renewal notice deadline passed"};
+  if(a.exp<=WINDOW)return{k:"warn",t:"Expiring within 90 days"};
+  return null;
+}
+function statusPill(s){
+  const k={Executed:"good",Expired:"idle",Terminated:"idle","Out for signature":"info","In review":"info",Drafting:"info",Requested:"info"}[s]||"idle";
+  return `<span class="pill p-${k}">${esc(s)}</span>`;
+}
+function daysCell(a){
+  if(a.exp==null)return '<span class="days" style="color:var(--muted)">—</span>';
+  const al=alertOf(a), cls=al?(al.k==="bad"?"d-bad":"d-warn"):"";
+  const txt=a.exp<0?`${-a.exp} days ago`:`${a.exp} days`;
+  return `<span class="days ${cls}">${txt}</span>`;
+}
+const openObs=()=>A.flatMap(a=>a.obs.map((o,i)=>({a,o,i}))).filter(x=>!x.o.done);
+function obPill(o){
+  if(o.done)return '<span class="pill p-good">Done</span>';
+  if(o.due<0)return `<span class="pill p-bad">${-o.due}d overdue</span>`;
+  if(o.due<=30)return `<span class="pill p-warn">Due in ${o.due}d</span>`;
+  return `<span class="pill p-idle">Due ${dt(o.due)}</span>`;
+}
+const main=document.getElementById("main");
+const BANNER='<div class="proto">Prototype with sample data. Agreements you add, obligations you tick off and alert settings reset when the page reloads. No emails are sent.</div>';
+let view="home", detailId=null;
+
+function renderHome(){
+  const active=A.filter(a=>a.status==="Executed");
+  const attention=A.filter(alertOf).sort((x,y)=>x.exp-y.exp);
+  const inprog=A.filter(a=>STEPS.includes(a.status));
+  const due=openObs().filter(x=>x.o.due<=30).sort((x,y)=>x.o.due-y.o.due);
+  main.innerHTML=BANNER+`
+  <div class="head"><div><h1>Overview</h1><p class="sub">Here's where Adovate's agreements stand today, ${dt(0)}.</p></div>
+  <a class="btn" href="#new" style="text-decoration:none">Add agreement</a></div>
+  <div class="stats">
+    <a class="stat" href="#agreements" data-filter="Executed"><b>${active.length}</b><span>Active agreements</span></a>
+    <a class="stat ${attention.length?'alert':''}" href="#agreements" data-filter="attention"><b>${attention.length}</b><span>Need attention</span></a>
+    <a class="stat" href="#agreements" data-filter="progress"><b>${inprog.length}</b><span>In progress</span></a>
+    <a class="stat ${due.length?'warnc':''}" href="#obligations"><b>${due.length}</b><span>Obligations due in 30 days</span></a>
+  </div>
+  <div class="cols">
+    <section class="panel"><h2>Needs attention</h2><div class="list">${attention.map(a=>{const al=alertOf(a);return `
+      <div class="item" tabindex="0" data-open="${a.id}"><span class="t">${esc(a.party)} · ${esc(a.type)}</span>
+      <span class="m"><span class="mono">${a.id}</span> · expires ${dt(a.exp)} · owner ${esc(a.owner)}</span>
+      <span class="r"><span class="pill p-${al.k}">${esc(al.t)}</span></span></div>`}).join("")||'<p class="empty">Nothing needs attention.</p>'}</div></section>
+    <section class="panel"><h2>Obligations due soon</h2><div class="list">${due.map(({a,o})=>`
+      <div class="item" tabindex="0" data-open="${a.id}"><span class="t">${esc(o.t)}</span>
+      <span class="m">${esc(a.party)} · ${esc(a.owner)}</span><span class="r">${obPill(o)}</span></div>`).join("")||'<p class="empty">Nothing due in the next 30 days.</p>'}</div></section>
+  </div>
+  <section class="panel"><h2>Agreements in progress</h2>
+    <div class="pipe">${STEPS.map(s=>`<div class="step"><b>${inprog.filter(a=>a.status===s).length}</b><span>${s}</span></div>`).join("")}</div>
+    <div class="list">${inprog.map(a=>`<div class="item" tabindex="0" data-open="${a.id}"><span class="t">${esc(a.party)} · ${esc(a.type)}</span>
+      <span class="m">${statusPill(a.status)} &nbsp;Waiting on <b>${esc(a.waiting||"—")}</b></span><span class="r mono">${a.id}</span></div>`).join("")}</div>
+  </section>`;
+}
+
+let F={q:"",type:"",status:"",special:""};
+function renderList(){
+  const types=[...new Set(A.map(a=>a.type))].sort(), sts=["Requested","Drafting","In review","Out for signature","Executed","Expired","Terminated"];
+  main.innerHTML=BANNER+`
+  <div class="head"><div><h1>Agreements</h1><p class="sub">Search by counterparty, ID, subject or owner. Click a row to open it.</p></div>
+  <a class="btn" href="#new" style="text-decoration:none">Add agreement</a></div>
+  <div class="filters">
+    <input id="q" type="search" placeholder="Search agreements" value="${esc(F.q)}" aria-label="Search agreements">
+    <select id="ft" aria-label="Type"><option value="">All types</option>${types.map(t=>`<option ${F.type===t?"selected":""}>${esc(t)}</option>`).join("")}</select>
+    <select id="fs" aria-label="Status"><option value="">All statuses</option><option value="attention" ${F.special==="attention"?"selected":""}>Needs attention</option><option value="progress" ${F.special==="progress"?"selected":""}>In progress</option>${sts.map(s=>`<option ${F.status===s?"selected":""}>${s}</option>`).join("")}</select>
+  </div>
+  <div class="tablewrap"><table><thead><tr><th>Agreement ID</th><th>Counterparty</th><th>Type</th><th>Direction</th><th>Status</th><th>Expires</th><th>Time left</th><th>Owner</th></tr></thead><tbody id="rows"></tbody></table></div>`;
+  const draw=()=>{
+    const q=F.q.toLowerCase();
+    const rows=A.filter(a=>(!q||[a.id,a.party,a.subject,a.owner,a.program].join(" ").toLowerCase().includes(q))
+      &&(!F.type||a.type===F.type)&&(!F.status||a.status===F.status)
+      &&(F.special!=="attention"||alertOf(a))&&(F.special!=="progress"||STEPS.includes(a.status)))
+      .sort((x,y)=>(x.exp??1e9)-(y.exp??1e9));
+    document.getElementById("rows").innerHTML=rows.map(a=>{const al=alertOf(a);return `<tr tabindex="0" data-open="${a.id}">
+      <td class="mono">${a.id}</td><td><b>${esc(a.party)}</b><div class="alerttext" style="color:var(--muted)">${esc(a.subject)}</div></td>
+      <td>${esc(a.type)}</td><td>${esc(a.dir)}</td><td>${statusPill(a.status)}${al?`<div class="alerttext" style="color:var(--${al.k});margin-top:4px">${esc(al.t)}</div>`:""}</td>
+      <td class="mono">${dt(a.exp)}</td><td>${daysCell(a)}</td><td>${esc(a.owner)}</td></tr>`}).join("")||`<tr><td colspan="8" class="empty">No agreements match. Try clearing a filter.</td></tr>`;
+  };
+  draw();
+  document.getElementById("q").addEventListener("input",e=>{F.q=e.target.value;draw()});
+  document.getElementById("ft").addEventListener("change",e=>{F.type=e.target.value;draw()});
+  document.getElementById("fs").addEventListener("change",e=>{const v=e.target.value;F.special=(v==="attention"||v==="progress")?v:"";F.status=F.special?"":v;draw()});
+}
+
+function renderObligations(){
+  const all=A.flatMap(a=>a.obs.map((o,i)=>({a,o,i}))).sort((x,y)=>(x.o.done-y.o.done)||(x.o.due-y.o.due));
+  main.innerHTML=BANNER+`<div class="head"><div><h1>Obligations</h1><p class="sub">Things Adovate or a partner has to do under a signed agreement. Tick one off when it's done.</p></div></div>
+  <section class="panel"><div class="list">${all.map(({a,o,i})=>`
+    <div class="ob ${o.done?"done":""}"><input type="checkbox" id="ob-${a.id}-${i}" data-ob="${a.id}|${i}" ${o.done?"checked":""} aria-label="Mark done">
+    <div><div class="txt"><b>${esc(o.t)}</b></div><div class="alerttext" style="color:var(--muted)"><a href="#" data-open="${a.id}" style="color:var(--accent)">${esc(a.party)} · ${a.id}</a> · owner ${esc(a.owner)} · due ${dt(o.due)}</div></div>
+    ${obPill(o)}</div>`).join("")}</div></section>`;
+}
+
+function renderDetail(){
+  const a=A.find(x=>x.id===detailId); if(!a){go("agreements");return}
+  const al=alertOf(a);
+  main.innerHTML=BANNER+`<button class="back" id="back">← All agreements</button>
+  <div class="head"><div><p class="mono" style="margin:0;color:var(--muted)">${a.id}</p><h1>${esc(a.party)} · ${esc(a.type)}</h1>
+  <p class="sub">${esc(a.subject)}</p></div><div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">${statusPill(a.status)}${al?`<span class="pill p-${al.k}">${esc(al.t)}</span>`:""}</div></div>
+  ${a.waiting?`<div class="panel" style="flex-direction:row;flex-wrap:wrap;gap:8px;align-items:center"><span style="color:var(--muted)">Waiting on</span><b>${esc(a.waiting)}</b><span style="color:var(--muted)">since ${dt(a.hist.at(-1)[0])}</span></div>`:""}
+  <div class="cols">
+    <section class="panel"><h2>Details</h2><dl>
+      <dt>Type</dt><dd>${esc(a.type)}</dd><dt>Direction</dt><dd>${esc(a.dir)}</dd>
+      <dt>Counterparty contact</dt><dd>${esc(a.contact)}</dd><dt>Internal owner</dt><dd>${esc(a.owner)}</dd>
+      <dt>Project or program</dt><dd>${esc(a.program)}</dd>
+      <dt>Effective date</dt><dd class="mono">${dt(a.eff)}</dd><dt>Expiration date</dt><dd><span class="mono">${dt(a.exp)}</span> ${a.exp!=null?"· "+daysCell(a):""}</dd>
+      <dt>Auto-renews</dt><dd>${esc(a.auto)}</dd>
+      <dt>Renewal notice</dt><dd>${a.notice!=null&&a.exp!=null?`${a.notice} days · deadline <span class="mono">${dt(a.exp-a.notice)}</span>`:"—"}</dd>
+      <dt>Expiration alerts</dt><dd>${noticeChips(a)}</dd>
+      <dt>Confidentiality survives</dt><dd>${a.survive!=null?a.survive+" years after expiration":"—"}</dd>
+    </dl></section>
+    <div style="display:flex;flex-direction:column;gap:16px;min-width:0">
+      <section class="panel"><h2>Signed copy</h2><div class="pdf">${a.status==="Executed"||a.status==="Expired"?`<b>${a.id}_signed.pdf</b><span>In the real platform this links to the file on the shared drive.</span>`:"<span>No signed copy yet. It's added here once both parties sign.</span>"}</div></section>
+      <section class="panel"><h2>Obligations</h2>${a.obs.length?`<div class="list">${a.obs.map((o,i)=>`<div class="ob ${o.done?"done":""}"><input type="checkbox" id="dob-${i}" data-ob="${a.id}|${i}" ${o.done?"checked":""} aria-label="Mark done"><div class="txt">${esc(o.t)}</div>${obPill(o)}</div>`).join("")}</div>`:'<p class="empty" style="padding:0">No obligations recorded.</p>'}</section>
+      <section class="panel"><h2>History</h2><div class="hist">${a.hist.slice().reverse().map(([d,t])=>`<div><span class="mono">${dt(d)}</span><span>${esc(t)}</span></div>`).join("")}</div></section>
+    </div>
+  </div>`;
+  document.getElementById("back").onclick=()=>go("agreements");
+}
+
+function renderNew(){
+  main.innerHTML=BANNER+`<div class="head"><div><h1>Add agreement</h1><p class="sub">Fill in what you know. Fields marked optional can wait.</p></div></div>
+  <div class="drop"><p><b>Have the signed PDF?</b> In the real platform, Claude reads it and fills in the parties, dates and obligations for you to check. Here, the button fills in sample values so you can see the idea.</p>
+  <button class="btn ghost" type="button" id="demo">Fill with sample values</button></div>
+  <form class="grid panel" id="nf">
+    <label>Counterparty<input id="f-party" required placeholder="e.g. Northfield University"></label>
+    <label>Agreement type<select id="f-type"><option>MTA</option><option>CDA / NDA</option><option>DUA</option><option>Collaboration</option><option>Services</option><option>Other</option></select></label>
+    <label>Direction<select id="f-dir"><option>Inbound</option><option>Outbound</option><option>Mutual</option></select></label>
+    <label>Status<select id="f-status"><option>Requested</option><option>Drafting</option><option>In review</option><option>Out for signature</option><option>Executed</option></select></label>
+    <label class="wide">What it covers<input id="f-subject" required placeholder="Material, data set or information"></label>
+    <label>Internal owner<input id="f-owner" required placeholder="Who at Adovate is responsible"></label>
+    <label>Counterparty contact <span>optional</span><input id="f-contact"></label>
+    <label>Effective date <span>optional</span><input id="f-eff" type="date"></label>
+    <label>Expiration date <span>optional</span><input id="f-exp" type="date"></label>
+    <label>Renewal notice (days) <span>optional</span><input id="f-notice" type="number" min="0"></label>
+    <label>Auto-renews<select id="f-auto"><option>No</option><option>Yes</option></select></label>
+    <label class="wide">Key obligation <span>optional, one for now</span><input id="f-ob" placeholder="e.g. Return remaining material at end of term"></label>
+    <div class="wide" style="display:flex;gap:8px"><button class="btn" type="submit">Save agreement</button><a class="btn ghost" href="#agreements" style="text-decoration:none">Cancel</a></div>
+  </form>`;
+  const $=id=>document.getElementById(id);
+  $("demo").onclick=()=>{const v=(id,x)=>$(id).value=x;
+    v("f-party","Ridgeline University");v("f-type","MTA");v("f-dir","Inbound");v("f-status","Executed");v("f-subject","Bronchial smooth muscle cell line");
+    v("f-owner","S. Lindqvist");v("f-contact","Office of technology transfer");
+    const iso=off=>new Date(T0+off*DAY).toISOString().slice(0,10);v("f-eff",iso(0));v("f-exp",iso(730));v("f-notice","60");v("f-auto","No");
+    v("f-ob","Return or destroy remaining material at end of term");toast("Sample values filled in. Check them, then save.")};
+  $("nf").addEventListener("submit",e=>{e.preventDefault();
+    const off=s=>s?Math.round((Date.parse(s+"T00:00:00")-T0)/DAY):null;
+    const type=$("f-type").value, code={"MTA":"MTA","CDA / NDA":"CDA","DUA":"DUA","Collaboration":"COL","Services":"SVC","Other":"OTH"}[type];
+    const yr=new Date().getFullYear(), n=String(A.filter(a=>a.id.includes(`-${code}-${yr}-`)).length+30).padStart(3,"0");
+    const exp=off($("f-exp").value), status=$("f-status").value;
+    const a={id:`ADO-${code}-${yr}-${n}`,type,dir:$("f-dir").value,party:$("f-party").value.trim(),contact:$("f-contact").value.trim()||"—",owner:$("f-owner").value.trim(),
+      program:"—",subject:$("f-subject").value.trim(),status,waiting:STEPS.includes(status)?"Agreement owner":null,eff:off($("f-eff").value),exp,auto:$("f-auto").value,
+      notice:$("f-notice").value?Number($("f-notice").value):null,survive:null,obs:$("f-ob").value.trim()?[{t:$("f-ob").value.trim(),due:exp??30,done:false}]:[],hist:[[0,"Request logged"]]};
+    A.unshift(a);detailId=a.id;toast("Agreement saved");go("detail");});
+}
+
+// Expiration alerts: one weekly summary for leadership + individual urgent alerts. Settings are live.
+const N={day:1,urgent:14,pastDue:true,rec:{ceo:true,cfo:true,owner:true},extra:[],preview:"digest"};
+const DAYS=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+function recips(a){const r=[];if(N.rec.ceo)r.push("CEO");if(N.rec.cfo)r.push("CFO");if(N.rec.owner)r.push(a?a.owner+" (owner)":"Agreement owners");return r.concat(N.extra)}
+const live=()=>A.filter(a=>a.status==="Executed"&&a.exp!=null);
+function nextDigest(){const w=new Date(T0).getDay();return (N.day-w+7)%7}
+function digestGroups(){
+  const L=live().sort((x,y)=>x.exp-y.exp), seen=new Set(), once=r=>r.filter(a=>!seen.has(a.id)&&seen.add(a.id));
+  return [
+    {k:"bad",t:"Past expiration, status not updated",rows:L.filter(a=>a.exp<0)},
+    {k:"bad",t:"Renewal notice deadline passed",rows:L.filter(a=>a.exp>=0&&a.auto!=="Yes"&&a.notice!=null&&a.exp-a.notice<0)},
+    {k:"warn",t:"Expiring in the next 30 days",rows:L.filter(a=>a.exp>=0&&a.exp<=30)},
+    {k:"warn",t:"Expiring in 31 to 60 days",rows:L.filter(a=>a.exp>30&&a.exp<=60)},
+    {k:"info",t:"Expiring in 61 to 90 days",rows:L.filter(a=>a.exp>60&&a.exp<=90)}
+  ].map(g=>({...g,rows:once(g.rows)}));
+}
+// urgent alerts: one email when an agreement crosses the threshold, and (optionally) one when it passes its date
+function urgents(){const out=[];live().forEach(a=>{
+  out.push({a,kind:"soon",send:a.exp-N.urgent});
+  if(N.pastDue)out.push({a,kind:"past",send:a.exp+1});
+});return out.map(x=>({...x,sent:x.send<=0}))}
+function noticeChips(a){
+  if(a.status!=="Executed"||a.exp==null)return '<span style="color:var(--muted)">Start once the agreement is executed</span>';
+  const inDigest=a.exp-90, u=a.exp-N.urgent;
+  return `<span class="chips"><span class="pill ${inDigest<=0?"p-idle":"p-info"}">Weekly summary ${inDigest<=0?"since":"from"} ${dt(Math.max(inDigest,-9999))}</span><span class="pill ${u<=0?"p-idle":"p-warn"}">Urgent alert ${u<=0?"sent":"on"} ${dt(u)}</span>${N.pastDue?`<span class="pill ${a.exp<0?"p-idle":"p-bad"}">Past-due alert ${a.exp<0?"sent":"on"} ${dt(a.exp+1)}</span>`:""}</span>`;
+}
+const ukey=x=>x.a.id+"|"+x.kind;
+function digestMail(){
+  const g=digestGroups(),to=recips(null),d=nextDigest(),total=new Set(g.flatMap(x=>x.rows.map(a=>a.id))).size;
+  return `<div class="mail"><div class="mh">
+  <div><span>To</span> ${to.length?esc(to.join(", ")):'<b style="color:var(--bad)">No recipients selected</b>'}</div>
+  <div><span>Subject</span> <b>Agreement summary, week of ${dt(d)}: ${total} need${total===1?"s":""} attention</b></div>
+  <div><span>Sends</span> ${DAYS.at(N.day)} ${dt(d)}, 8:00 AM</div></div>
+  <div class="mb"><p>Here's what's coming up across Adovate's agreements.</p>
+  ${g.filter(x=>x.rows.length).map(x=>`<p style="margin:12px 0 4px"><span class="pill p-${x.k}">${esc(x.t)} · ${x.rows.length}</span></p><ul>${x.rows.map(a=>`<li><b>${esc(a.party)}</b> ${esc(a.type)} · ${a.exp<0?`expired ${dt(a.exp)}`:`expires ${dt(a.exp)}`} · owner ${esc(a.owner)}</li>`).join("")}</ul>`).join("")||"<p>Nothing expires in the next 90 days.</p>"}
+  <p><a href="#" data-goto="agreements">Open Agreement Hub</a></p></div></div>`;
+}
+function urgentMail(x){const a=x.a,to=recips(a),past=x.kind==="past";
+  return `<div class="mail"><div class="mh">
+  <div><span>To</span> ${to.length?esc(to.join(", ")):'<b style="color:var(--bad)">No recipients selected</b>'}</div>
+  <div><span>Subject</span> <b style="color:var(--bad)">${past?"Expired":"Urgent"}: ${esc(a.party)} ${esc(a.type)} ${past?"expired":"expires"} ${dt(a.exp)}</b></div>
+  <div><span>${x.sent?"Sent":"Sends"}</span> ${dt(x.send)}</div></div>
+  <div class="mb"><p>${past?`The ${esc(a.type)} with <b>${esc(a.party)}</b> (${a.id}) expired on <b>${dt(a.exp)}</b> and is still marked active.`:`The ${esc(a.type)} with <b>${esc(a.party)}</b> (${a.id}) expires in <b>${N.urgent} days</b>, on ${dt(a.exp)}.`}</p>
+  <ul><li>Covers: ${esc(a.subject)}</li><li>Owner: ${esc(a.owner)}</li><li>Auto-renews: ${esc(a.auto)}</li>${a.obs.some(o=>!o.done)?`<li>Open obligations: ${a.obs.filter(o=>!o.done).map(o=>esc(o.t)).join("; ")}</li>`:""}</ul>
+  <p>${past?"The owner should confirm whether it was renewed, and update its status or upload the renewal.":"The owner should decide now whether to renew or let it end."}</p>
+  <p><a href="#" data-open="${a.id}">Open in Agreement Hub</a></p></div></div>`}
+function uitem(x,sel){const a=x.a;return `<div class="item ${sel?"sel":""}" tabindex="0" data-prev="${ukey(x)}"><span class="t">${esc(a.party)} · ${esc(a.type)}</span>
+  <span class="m">${x.kind==="past"?"Past-due alert":`${N.urgent}-day urgent alert`} · expires ${dt(a.exp)} · to ${esc(recips(a).join(", ")||"no one")}</span>
+  <span class="r">${x.sent?`<span class="pill p-idle">Sent ${dt(x.send)}</span>`:`<span class="pill ${x.kind==="past"?"p-bad":"p-warn"}">In ${x.send} days</span>`}</span></div>`}
+function renderAlerts(){
+  const U=urgents(),up=U.filter(x=>!x.sent&&x.kind==="soon"&&x.send<=180).sort((x,y)=>x.send-y.send),sent=U.filter(x=>x.sent&&x.send>=-90).sort((x,y)=>y.send-x.send);
+  const sel=N.preview==="digest"?null:U.find(x=>ukey(x)===N.preview);
+  const isDigest=!sel;
+  main.innerHTML=BANNER+`<div class="head"><div><h1>Expiration alerts</h1><p class="sub">A weekly summary keeps leadership up to date. Separate urgent emails go out only when an agreement is about to expire or already has.</p></div></div>
+  <div class="cols">
+    <section class="panel"><h2>Weekly summary</h2>
+      <label class="chk" for="f-day">Send every <select id="f-day">${DAYS.map((d,i)=>`<option value="${i}" ${N.day===i?"selected":""}>${d}</option>`).join("")}</select> at 8:00 AM</label>
+      <p class="alerttext" style="color:var(--muted);margin:0">Lists everything expiring within 90 days, grouped by how soon, plus anything overdue.</p>
+      <h2>Urgent alerts</h2>
+      <label class="chk" for="f-urgent">Email right away when an agreement is <select id="f-urgent">${[7,14,21,30].map(n=>`<option value="${n}" ${N.urgent===n?"selected":""}>${n} days</option>`).join("")}</select> from expiring</label>
+      <div class="proto"><b>To revisit before launch:</b> 14 days is a starting point. Some MTAs require 60 days' notice to renew, so a 14-day alert can arrive after the last day to act. Consider also alerting a set number of days before each agreement's renewal notice deadline.</div>
+      <label class="chk"><input type="checkbox" id="f-past" ${N.pastDue?"checked":""}>Also email the day after it expires if it's still marked active</label>
+      <h2>Who gets them</h2>
+      <div class="ms"><label class="chk"><input type="checkbox" id="rc-ceo" data-rc="ceo" ${N.rec.ceo?"checked":""}>CEO</label>
+      <label class="chk"><input type="checkbox" id="rc-cfo" data-rc="cfo" ${N.rec.cfo?"checked":""}>CFO</label>
+      <label class="chk"><input type="checkbox" id="rc-owner" data-rc="owner" ${N.rec.owner?"checked":""}>Agreement owner</label>
+      ${N.extra.map((x,i)=>`<span class="pill p-info">${esc(x)}<button class="x" type="button" data-rm="${i}" aria-label="Remove ${esc(x)}">×</button></span>`).join("")}</div>
+      <form class="addr" id="addr"><input id="addr-in" placeholder="Add someone, e.g. General Counsel" aria-label="Add a recipient"><button class="btn ghost" type="submit">Add</button></form>
+    </section>
+    <section class="panel"><div class="head" style="align-items:center"><h2>Email preview</h2>${isDigest?"":`<button class="back" type="button" id="show-digest">Show weekly summary</button>`}</div>${isDigest?digestMail():urgentMail(sel)}</section>
+  </div>
+  <section class="panel"><h2>Urgent alerts coming up · next 180 days</h2><div class="list">${up.map(x=>uitem(x,sel&&ukey(x)===ukey(sel))).join("")||'<p class="empty">No urgent alerts scheduled.</p>'}</div></section>
+  <section class="panel"><h2>Urgent alerts sent · last 90 days</h2><div class="list">${sent.map(x=>uitem(x,sel&&ukey(x)===ukey(sel))).join("")||'<p class="empty">None sent.</p>'}</div></section>`;
+  const q=s=>main.querySelector(s);
+  q("#f-day").onchange=e=>{N.day=Number(e.target.value);renderAlerts()};
+  q("#f-urgent").onchange=e=>{N.urgent=Number(e.target.value);counts();renderAlerts()};
+  q("#f-past").onchange=e=>{N.pastDue=e.target.checked;if(!N.pastDue&&String(N.preview).endsWith("|past"))N.preview="digest";renderAlerts()};
+  main.querySelectorAll("[data-rc]").forEach(i=>i.onchange=()=>{N.rec[i.dataset.rc]=i.checked;renderAlerts()});
+  main.querySelectorAll("[data-rm]").forEach(b=>b.onclick=()=>{N.extra.splice(Number(b.dataset.rm),1);renderAlerts()});
+  q("#addr").onsubmit=e=>{e.preventDefault();const v=q("#addr-in").value.trim();if(v){N.extra.push(v);toast(v+" added to alerts")}renderAlerts()};
+  if(q("#show-digest"))q("#show-digest").onclick=()=>{N.preview="digest";renderAlerts()};
+  main.querySelectorAll("[data-goto]").forEach(l=>l.onclick=e=>{e.preventDefault();go(l.dataset.goto)});
+  main.querySelectorAll("[data-prev]").forEach(el=>{const pick=()=>{N.preview=el.dataset.prev;renderAlerts()};el.onclick=pick;el.onkeydown=e=>{if(e.key==="Enter")pick()}});
+}
+
+function counts(){document.getElementById("c-ag").textContent=A.length;document.getElementById("c-ob").textContent=openObs().length;document.getElementById("c-al").textContent=live().filter(a=>a.exp<=N.urgent).length}
+function render(){
+  counts();
+  document.querySelectorAll("#nav a").forEach(x=>x.classList.toggle("on",x.dataset.v===(view==="detail"?"agreements":view)));
+  ({home:renderHome,agreements:renderList,obligations:renderObligations,alerts:renderAlerts,new:renderNew,detail:renderDetail}[view]||renderHome)();
+  window.scrollTo(0,0);
+}
+function go(v){view=v;render()}
+let tt;function toast(m){const t=document.getElementById("toast");t.textContent=m;t.hidden=false;clearTimeout(tt);tt=setTimeout(()=>t.hidden=true,2600)}
+
+document.addEventListener("click",e=>{
+  const nav=e.target.closest("a[href^='#']");
+  const op=e.target.closest("[data-open]");
+  if(op){e.preventDefault();detailId=op.dataset.open;go("detail");return}
+  if(nav){const v=nav.getAttribute("href").slice(1);if(["home","agreements","obligations","alerts","new"].includes(v)){e.preventDefault();
+    if(nav.dataset.filter){F={q:"",type:"",status:"",special:""};const f=nav.dataset.filter;if(f==="attention"||f==="progress")F.special=f;else F.status=f;}
+    go(v);}}
+});
+document.addEventListener("keydown",e=>{if(e.key==="Enter"){const op=e.target.closest&&e.target.closest("[data-open]");if(op&&op.tagName!=="A"){detailId=op.dataset.open;go("detail")}}});
+document.addEventListener("change",e=>{const d=e.target.dataset&&e.target.dataset.ob;if(!d)return;const[id,i]=d.split("|");const a=A.find(x=>x.id===id);
+  a.obs[i].done=e.target.checked;if(e.target.checked)a.hist.push([0,"Obligation completed: "+a.obs[i].t]);toast(e.target.checked?"Marked done":"Marked not done");render()});
+const h=(location.hash||"").slice(1); if(["home","agreements","obligations","alerts","new"].includes(h))view=h;
+render();
+</script>
+
+</body>
+</html>
