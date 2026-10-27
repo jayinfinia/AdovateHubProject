@@ -9,7 +9,7 @@ A clickable prototype of a central platform for tracking Adovate's third-party a
 | Path | What it is |
 | --- | --- |
 | `index.html` | The prototype website. Open it in any browser; no install needed. |
-| `tracker-template/Adovate_Agreement_Tracker.xlsx` | Starter Excel tracker with dropdowns and automatic expiration alerts (one example row). |
+| `Adovate_Agreement_Tracker.xlsx` | Starter Excel tracker with dropdowns and automatic expiration alerts (one example row). |
 
 ## Prototype screens
 
